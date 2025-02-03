@@ -1,0 +1,37 @@
+// Import required modules
+const express = require("express");
+const userRouter = express.Router();
+const multer = require("multer");
+const fs = require("fs");
+
+// Configure multer to store files in 'uploads/' directory
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = "uploads/";
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true }); // Ensure directory exists
+    }
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
+// Import user controller
+const {
+  handlePostUserSignup,
+  handlePostUserLogin,
+  handleGetUser,
+  handlePutUpdateUser,
+} = require("../controllers/userController.js");
+
+// User routes
+userRouter.post("/signup", handlePostUserSignup);
+userRouter.post("/login", handlePostUserLogin);
+userRouter.get("/:email", handleGetUser);
+userRouter.put("/update", upload.single("picURL"), handlePutUpdateUser);
+
+module.exports = { userRouter };
