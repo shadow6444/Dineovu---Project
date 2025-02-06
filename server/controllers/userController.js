@@ -77,6 +77,7 @@ const handlePostUserLogin = async (req, res) => {
       email: updatedUser.email,
       name: updatedUser.name,
       picURL: updatedUser.picURL,
+      role: updatedUser.role,
     };
     const token = jwt.sign(payload, jwt_secret_key, { expiresIn: "24h" });
     res.status(200).json({
