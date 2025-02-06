@@ -30,6 +30,10 @@ import ProfileLayout from "./components/layout/ProfileLayout";
 import Profile from "./components/pages/Profile";
 import Reservations from "./components/pages/Reservations";
 import Orders from "./components/pages/Orders";
+import AdminLayout from "./components/layout/AminLayout";
+import AdminMenu from "./components/pages/AdminMenu";
+import AdminMenuAdd from "./components/pages/AdminMenuAdd";
+import AdminMenuUpdate from "./components/pages/AdminUpdateItem";
 
 function App() {
   const [isEmailEntered, setIsEmailEntered] = useState(false);
@@ -43,7 +47,7 @@ function App() {
       "passwordResetSuccessful"
     );
     console.log(
-      "password reset successfult from appjs",
+      "password reset successfull from appjs",
       passwordResetSuccessful
     );
     setIsPasswordReset(!!passwordResetSuccessful);
@@ -53,6 +57,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Welcome />} />
+          <Route path="/menu" element={<AdminLayout />}>
+            <Route index element={<AdminMenu />} />
+            <Route path="/menu/add" element={<AdminMenuAdd />} />
+            <Route path="/menu/update" element={<AdminMenuUpdate />} />
+          </Route>
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
