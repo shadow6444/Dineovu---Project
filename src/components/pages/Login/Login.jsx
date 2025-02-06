@@ -80,7 +80,8 @@ const Login = () => {
         localStorage.setItem("token", token);
         const userData = jwtDecode(token);
         dispatch(setUser(userData));
-        navigate("/home");
+        if (userData.role === "customer") navigate("/home");
+        else if (userData.role === "admin") navigate("/menu");
       } else {
         console.error("Login failed:", response.data.message);
       }
