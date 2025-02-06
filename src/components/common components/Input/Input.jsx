@@ -13,7 +13,7 @@ const Input = ({
 }) => {
   return (
     <div className="flex items-center px-2 py-2 border border-grayWood rounded-lg w-full">
-      <img src={image} alt="mail image" className="h-5 w-5" />
+      {image && <img src={image} alt="mail image" className="h-5 w-5" />}
       <input
         value={value}
         onChange={onChange}
