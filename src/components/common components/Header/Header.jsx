@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 import dineovuLogo from "../../../assets/dineovuLogo.svg";
 import defaultPhoto from "../../../assets/default_picture.svg";
 import { useEffect, useRef, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
   const [isVisible, setIsVisible] = useState(false);
   const user = useSelector((state) => state.user.user);
   const dropdownRef = useRef(null);
@@ -115,7 +118,7 @@ const Header = () => {
             className="border-none bg-white rounded-full flex items-center justify-center relative z-50"
           >
             <img
-              src={user?.picURL !== "none" ? user?.picURL : defaultPhoto}
+              src={decoded?.picURL !== "none" ? decoded?.picURL : defaultPhoto}
               alt="profile picture"
               height={50}
               width={50}
