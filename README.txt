@@ -1,5 +1,8 @@
 Hello and Welcome to Dineovu - Cafe Application (where our application is you digital companion)
 
+After Downloading the project run
+# npm install vite --save-dev
+
 To start the project open the terminal and run
 # npm run dev
 
@@ -7,6 +10,11 @@ then open another terminal to start the backend server
 tun the command
 # cd server
 to go to server directory
+
+then remove the dependencies bu running this command
+# Remove-Item -Recurse -Force node_modules
+then install the node modules by running the command
+# npm install
 
 then run the command
 # npm start
