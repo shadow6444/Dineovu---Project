@@ -11,8 +11,6 @@ tun the command
 # cd server
 to go to server directory
 
-then remove the dependencies bu running this command
-# Remove-Item -Recurse -Force node_modules
 then install the node modules by running the command
 # npm install
 
