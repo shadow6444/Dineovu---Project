@@ -28,10 +28,18 @@ const {
   handlePutUpdateUser,
 } = require("../controllers/userController.js");
 
+// Import auth middleware
+const { verifyToken } = require("../middleware/userAuth.js");
+
 // User routes
 userRouter.post("/signup", handlePostUserSignup);
 userRouter.post("/login", handlePostUserLogin);
 userRouter.get("/:email", handleGetUser);
-userRouter.put("/update", upload.single("picURL"), handlePutUpdateUser);
+userRouter.put(
+  "/update",
+  verifyToken,
+  upload.single("picURL"),
+  handlePutUpdateUser
+);
 
 module.exports = { userRouter };
