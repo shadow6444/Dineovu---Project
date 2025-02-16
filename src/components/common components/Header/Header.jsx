@@ -1,15 +1,14 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dineovuLogo from "../../../assets/dineovuLogo.svg";
-import defaultPhoto from "../../../assets/default_picture.svg";
+import defaultPhoto from "../../../assets/defaultpicture.svg";
 import { useEffect, useRef, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
-  const token = localStorage.getItem("token");
-  const decoded = jwtDecode(token);
   const [isVisible, setIsVisible] = useState(false);
   const user = useSelector((state) => state.user.user);
+  console.log(user?.picURL);
   const dropdownRef = useRef(null);
   const location = useLocation();
 
@@ -118,7 +117,7 @@ const Header = () => {
             className="border-none bg-white rounded-full flex items-center justify-center relative z-50"
           >
             <img
-              src={decoded?.picURL !== "none" ? decoded?.picURL : defaultPhoto}
+              src={user?.picURL !== "none" ? user?.picURL : defaultPhoto}
               alt="profile picture"
               height={50}
               width={50}
@@ -134,7 +133,7 @@ const Header = () => {
                 to="/profile"
                 className={({ isActive }) =>
                   isProfileActive
-                    ? "block px-4 py-2 text-amberColor text-center"
+                    ? "block w-full px-4 py-2 text-amberColor text-center"
                     : "block px-4 py-2 hover:text-white hover:bg-amberColor text-center transition-colors w-full rounded-lg"
                 }
               >
