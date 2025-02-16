@@ -30,7 +30,7 @@ import ProfileLayout from "./components/layout/ProfileLayout";
 import Profile from "./components/pages/Profile";
 import Reservations from "./components/pages/Reservations";
 import Orders from "./components/pages/Orders";
-import AdminLayout from "./components/layout/AminLayout";
+import AdminLayout from "./components/layout/AdminLayout/index.js";
 import AdminMenu from "./components/pages/AdminMenu";
 import AdminMenuAdd from "./components/pages/AdminMenuAdd";
 import AdminMenuUpdate from "./components/pages/AdminUpdateItem";
