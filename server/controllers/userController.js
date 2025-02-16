@@ -121,23 +121,10 @@ const handleGetUser = async (req, res) => {
 
 const handlePutUpdateUser = async (req, res) => {
   try {
+    const user = req.user;
     const { name, currentPassword, newPassword } = req.body;
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Authorization token is missing" });
-    }
 
-    let decodedToken;
-    try {
-      decodedToken = jwt.verify(token, jwt_secret_key);
-    } catch (error) {
-      return res
-        .status(403)
-        .json({ success: false, message: "Invalid or expired token" });
-    }
-    const userFind = await User.findOne({ email: decodedToken.email });
+    const userFind = await User.findOne({ email: user.email });
 
     if (!userFind)
       return res.status(404).json({
