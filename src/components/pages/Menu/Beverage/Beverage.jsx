@@ -9,7 +9,7 @@ const Beverage = () => {
   const [beverages, setBeverages] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
   const searchQuery = useContext(SearchContext);
-  const { addToCart } = useOutletContext();
+  // const { addToCart } = useOutletContext();
 
   useEffect(() => {
     const fetchBeverages = async () => {
@@ -80,7 +80,7 @@ const Beverage = () => {
                   Rs. {beverage.price}
                 </h4>
                 <button
-                  onClick={() => addToCart(beverage)}
+                  // onClick={() => addToCart(beverage)}
                   className="bg-amberColor px-4 py-2 w-fit border-none text-sm rounded-md text-white hover:bg-[#FF8D10] mt-4"
                 >
                   Add Item
