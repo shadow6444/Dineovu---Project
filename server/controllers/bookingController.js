@@ -7,6 +7,7 @@ const jwt_secret_key = "859215";
 
 const handlePostBookingForm = async (req, res) => {
   try {
+    const requestedUser = req.user;
     const {
       firstname,
       lastname,
@@ -30,23 +31,8 @@ const handlePostBookingForm = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "Please fill in all fields" });
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Authorization token is missing" });
-    }
 
-    let decodedToken;
-    try {
-      decodedToken = jwt.verify(token, jwt_secret_key);
-    } catch (error) {
-      return res
-        .status(403)
-        .json({ success: false, message: "Invalid or expired token" });
-    }
-
-    const user = await User.findOne({ _id: decodedToken._id });
+    const user = await User.findOne({ _id: requestedUser._id });
     if (!user) {
       return res
         .status(404)
@@ -153,12 +139,8 @@ const handlePostBookingPaymentForm = async (req, res) => {
 
 const handleGetBookings = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token)
-      return res.status(401).json({ success: false, message: "Unauthorized" });
-
-    const decoded = jwt.verify(token, jwt_secret_key);
-    const userId = decoded._id;
+    const tokenId = req.user._id;
+    const userId = tokenId;
 
     const bookings = await Booking.find({ userId });
 
