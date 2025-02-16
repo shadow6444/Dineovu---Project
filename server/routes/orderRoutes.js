@@ -7,14 +7,16 @@ const {
   handleGetSpecificUserOrder,
   handleGetSpecificOrder,
   handlePostCreateOrder,
-  handleUpdateOrder,
   handleGetAllOrders,
   handlePostOrderPaymentForm,
 } = require("../controllers/orderController.js");
 
+// Import auth middleware
+const { verifyToken } = require("../middleware/userAuth.js");
+
 // booking routes
 orderRouter.post("/", handlePostCreateOrder);
-orderRouter.get("/", handleGetSpecificUserOrder);
+orderRouter.get("/", verifyToken, handleGetSpecificUserOrder);
 orderRouter.get("/all", handleGetAllOrders);
 orderRouter.get("/:id", handleGetSpecificOrder);
 orderRouter.delete("/:id", handleDeleteOrder);
