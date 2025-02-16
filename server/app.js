@@ -10,7 +10,7 @@ const { menuRouter } = require("./routes/menuRoutes.js");
 const { orderRouter } = require("./routes/orderRoutes.js");
 
 // middleware to parse incoming requests
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "http://localhost:5174" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
