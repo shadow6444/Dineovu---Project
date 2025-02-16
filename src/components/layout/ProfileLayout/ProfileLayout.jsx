@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import defaultPhoto from "../../../assets/default_picture.svg";
+import defaultPhoto from "../../../assets/defaultpicture.svg";
 import { useEffect } from "react";
-import { isPending } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
 
 const ProfileLayout = () => {
   const user = useSelector((state) => state.user.user);
