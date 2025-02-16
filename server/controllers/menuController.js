@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const { Starter } = require("../model/starterModel.js");
 const { Beverage } = require("../model/beverageModel.js");
 const { MainCourse } = require("../model/mainCourseModel.js");
@@ -85,11 +84,11 @@ const handleUpdateItem = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "Id is required" });
-
     const itemFind =
       (await Starter.findById(id)) ||
       (await Beverage.findById(id)) ||
       (await MainCourse.findById(id));
+      
 
     if (!itemFind) {
       return res
