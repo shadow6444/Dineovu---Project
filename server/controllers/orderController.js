@@ -148,9 +148,8 @@ const handlePostOrderPaymentForm = async (req, res) => {
 
 const handleGetSpecificUserOrder = async (req, res) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    const decoded = jwt.verify(token, jwt_secret_key);
-    const userId = decoded._id;
+    const tokenId = req.user._id;
+    const userId = tokenId;
 
     const orders = await Order.find({ userId })
       .populate("items.itemId")
@@ -224,37 +223,11 @@ const handleDeleteOrder = async (req, res) => {
   }
 };
 
-const handleUpdateOrder = async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    const { items, totalAmount } = req.body;
-
-    const order = await Order.findById(orderId);
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
-    }
-    if (items) order.items = items;
-    if (totalAmount) order.totalAmount = totalAmount;
-
-    await order.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Order updated successfully", order });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error updating order",
-      error: error.message,
-    });
-  }
-};
-
 module.exports = {
   handlePostCreateOrder,
   handleGetSpecificUserOrder,
   handleGetSpecificOrder,
   handleDeleteOrder,
-  handleUpdateOrder,
   handleGetAllOrders,
   handlePostOrderPaymentForm,
 };
