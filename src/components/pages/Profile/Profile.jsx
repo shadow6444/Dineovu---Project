@@ -5,7 +5,7 @@ import Input from "../../common components/Input";
 import Success from "../../../assets/Image 5.svg";
 import Username from "../../../assets/Profile.svg";
 import Password from "../../../assets/password.svg";
-import Default from "../../../assets/default_picture.svg";
+import Default from "../../../assets/defaultpicture.svg";
 import { setUser } from "../../../../redux/userSlice";
 
 const Profile = () => {
